@@ -1,0 +1,43 @@
+#titlebar {
+  width:800 px; 
+  padding: 5px;
+  margin: 0px;
+}
+#page {
+  width:800 px; 
+}
+#leftpanel {
+  width:19%; 
+  padding: 1px;
+  margin-left: 0px;
+  margin-right: 2px;
+  margin-top: 2px;
+  margin-bottom: 0px;
+  float:left; 
+}
+#rightpanel {
+  width:79%; 
+  float:right; 
+}
+.singletag{
+  _border-width: 1px;
+  _border-color:#FFFFFF;
+  _border-style:solid;
+  _border-radius: 15px;
+    margin:5px;
+}
+	#taglist .ui-selecting { background: #FECA40; }
+	#taglist .ui-selected { background: #F39814; color: white; }
+	#taglist { list-style-type: none; margin: 0; padding: 0;  }
+	#taglist li { float:left;margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+
+.tablestyle{
+}
+.menustyle{
+   padding: 1px;
+    margin: 1px;
+    float:left;
+}
+.clear {
+    clear:both
+}

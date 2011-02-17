@@ -1,0 +1,147 @@
+<html>                                                                  
+ <head>                                                                  
+ <link type="text/css" href="css/trontastic/jquery-ui-1.8.9.custom.css" rel="stylesheet" />	
+ <link type="text/css" href="css/style.css" rel="stylesheet" />	
+ <link type="text/css" href="css/table.css" rel="stylesheet" />	
+ <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+ <script type="text/javascript" src="js/jquery-ui-1.8.9.custom.min.js"></script>
+ <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+ <script type="text/javascript"> 
+ 
+ var urltable ;
+ 
+ function displayError(jqXHR, textStatus, errorThrown){
+		                var resp = jqXHR.responseText ;
+		                var doc = $("#dbgtext")[0].contentWindow.document; 
+		                doc.write(resp);
+		                 $("#dbgtext")[0].show()
+		            }
+ 
+ function updateTableData(jsonData){
+    urltable.fnClearTable();
+    urltable.fnAddData(jsonData);
+ }
+ 
+     function updateTags(){
+        $.getJSON('/json/allTags', function(data) {
+                $('#taglist').html('');  
+          
+                $.each(data, function(key,val) {
+                        $('#taglist').append('<li class="singletag ui-widget-content">' + val + '</li>');
+                });
+          
+                $('#taglist').selectable({
+                    selected : function(event,ui){
+                        tags=new Array();
+                        $(".ui-selected",this).each(function(idx,item){
+                                tags.push(item.textContent);
+                        });
+                        tagslist=tags.join(",");
+                        listUrl = '/json/listPages/tag/'+tagslist;
+
+                        $.ajax({
+                          url: listUrl,
+                          dataType: 'json',
+                          success: updateTableData,
+                          error:displayError
+                        });
+                    }
+                });
+        });
+     }
+     
+	$(function() {  
+	    updateTags();
+		$("#page").tabs();
+		$("#submit_query").button();
+		urltable = $("#table_urllist").dataTable();
+		
+		var dbgframe =  $("#dbgtext") ;
+		dbgframe.hide();
+		//var doc = dbgframe[0].contentWindow.document; 
+		//doc.write('debug frame');
+		
+		$("#form_search").submit(function(){
+		    $("#newquery_msg").text("Submitting...").show();
+		    var formdata = $("#form_search").serialize();
+		    var strquery = $("#idquery").val();
+
+		    $.ajax({
+		            type:"POST",
+		            url:"/query",
+		            data:formdata,
+		            success:function(){
+		                $("#newquery_msg").text("Query submitted").show().fadeOut(3000);
+		                $("#latestqueries").append("<li>"+this.pdata_query+"</li>")
+		            },
+		            error:function(jqXHR, textStatus, errorThrown){
+		                var resp = jqXHR.responseText ;
+		                var doc = $("#dbgtext")[0].contentWindow.document; 
+		                doc.write(resp);
+		            },
+		            pdata_query:strquery
+		    });
+		    return false;
+		});
+	});
+   
+ </script>                                                               
+ </head>                                                                 
+ <body>                   
+   <div id="titlebar" class="ui-widget-header ui-corner-all">
+   Scrapeo
+   </div>
+   <div id="page" >
+	<ul>
+		<li><a href="#newquery">New query</a></li>
+		<li><a href="#urllist">Urls list</a></li>
+		<li><a href="#searches">Previous searches</a></li>
+	</ul>
+
+
+     <div id="newquery">
+       <form id="form_search">
+           <input id="idquery" name="search_query" size="50"/><br>
+           <input name="tags_query" size="50"/><br>
+           <input name="submit_query" type="submit"/> <span id="newquery_msg"></span>
+       </form>
+       
+       <ul id="latestqueries">
+       </ul>
+     </div>
+     
+     <div id="urllist">
+     <ol id="taglist"></ol>
+        <table id="table_urllist" class="display">
+            <thead>
+                <tr class="gradeX">
+                    <th>PR</th>
+                    <th>df links</th>
+                    <th>nf links</th>
+                    <th>url</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Row 1 Data 1</td>
+                    <td>Row 1 Data 2</td>
+                    <td>etc</td>
+                    <td>etc</td>
+                </tr>
+            </tbody>
+        </table>      
+     </div><!--urllist-->
+     
+     <div id="searches">
+     URL List<br>
+     More...<br>
+     </div><!--searches-->
+     
+   </div>
+
+   <iframe id="dbgtext" width="100%" height="500px">Debug.</iframe>
+     
+
+ </body>                                                                 
+ </html>
+

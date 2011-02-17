@@ -1,0 +1,31 @@
+#titlebar {
+  width:800 px; 
+  padding: 5px;
+  margin: 0px;
+}
+#page {
+  width:800 px; 
+}
+#leftpanel {
+  width:19%; 
+  padding: 1px;
+  margin-left: 0px;
+  margin-right: 2px;
+  margin-top: 2px;
+  margin-bottom: 0px;
+  float:left; 
+}
+#rightpanel {
+  width:79%; 
+  float:right; 
+}
+.tablestyle{
+}
+.menustyle{
+   padding: 1px;
+    margin: 1px;
+    float:left;
+}
+.clear {
+    clear:both
+}

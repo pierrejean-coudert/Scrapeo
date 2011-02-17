@@ -1,0 +1,30 @@
+#titlebar {
+  width:800 px; 
+  padding:10px;
+  margin:10px;   
+  font-size:1.7em;
+  border:5px solid black
+}
+#page {
+  width:800 px; 
+  padding:10px;
+  margin:10px;   
+  border:5px solid black
+}
+#leftpanel {
+  width:200px; 
+  padding:10px;
+  margin:10px;   
+  float:left; 
+  border:1px solid gray
+}
+#rightpanel {
+  width:590px; 
+  padding:10px;
+  margin:10px;   
+  float:right; 
+  border:1px solid gray
+}
+.clear {
+    clear:both
+}
