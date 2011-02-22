@@ -26,6 +26,11 @@
   _border-radius: 15px;
     margin:5px;
 }
+.caption{
+    padding-bottom:0px;
+    padding-top:10px;
+    color:lightgrey;
+}
 	#taglist .ui-selecting { background: #FECA40; }
 	#taglist .ui-selected { background: #F39814; color: white; }
 	#taglist { list-style-type: none; margin: 0; padding: 0;  }

@@ -45,7 +45,8 @@ def findPages(request):
             actions.findPages(
                 request,
                 query=formData.cleaned_data['search_query'],
-                tags=formData.cleaned_data['tags_query']
+                tags=formData.cleaned_data['tags_query'],
+                nbresults=20
                 )
             return HttpResponse('Query received')
         else:

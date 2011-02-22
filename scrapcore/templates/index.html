@@ -22,34 +22,34 @@
     urltable.fnAddData(jsonData);
  }
  
-     function updateTags(){
-        $.getJSON('/json/allTags', function(data) {
-                $('#taglist').html('');  
-          
-                $.each(data, function(key,val) {
-                        $('#taglist').append('<li class="singletag ui-widget-content">' + val + '</li>');
-                });
-          
-                $('#taglist').selectable({
-                    selected : function(event,ui){
-                        tags=new Array();
-                        $(".ui-selected",this).each(function(idx,item){
-                                tags.push(item.textContent);
-                        });
-                        tagslist=tags.join(",");
-                        listUrl = '/json/listPages/tag/'+tagslist;
+ function updateTags(){
+    $.getJSON('/json/allTags', function(data) {
+            $('#taglist').html('');  
+      
+            $.each(data, function(key,val) {
+                    $('#taglist').append('<li class="singletag ui-widget-content">' + val + '</li>');
+            });
+      
+            $('#taglist').selectable({
+                selected : function(event,ui){
+                    tags=new Array();
+                    $(".ui-selected",this).each(function(idx,item){
+                            tags.push(item.textContent);
+                    });
+                    tagslist=tags.join(",");
+                    listUrl = '/json/listPages/tag/'+tagslist;
 
-                        $.ajax({
-                          url: listUrl,
-                          dataType: 'json',
-                          success: updateTableData,
-                          error:displayError
-                        });
-                    }
-                });
-        });
-     }
-     
+                    $.ajax({
+                      url: listUrl,
+                      dataType: 'json',
+                      success: updateTableData,
+                      error:displayError
+                    });
+                }
+            });
+    });
+ }
+ 
 	$(function() {  
 	    updateTags();
 		$("#page").tabs();
@@ -91,7 +91,7 @@
  </head>                                                                 
  <body>                   
    <div id="titlebar" class="ui-widget-header ui-corner-all">
-   Scrapeo
+   Scrapeo v{{version}}
    </div>
    <div id="page" >
 	<ul>
@@ -103,8 +103,11 @@
 
      <div id="newquery">
        <form id="form_search">
+           <div class="caption">Query</div>
            <input id="idquery" name="search_query" size="50"/><br>
+           <div class="caption">Tags (comma separated)</div>
            <input name="tags_query" size="50"/><br>
+           <br>
            <input name="submit_query" type="submit"/> <span id="newquery_msg"></span>
        </form>
        

@@ -20,10 +20,13 @@ urlpatterns = patterns('',
     #Serve static files : NOT TO BE USED IN PRODUCTION
     (r'^files/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'static', 'show_indexes': True}),
     (r'^uidev/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'static', 'show_indexes': True}),
+    (r'^js/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'static/js', 'show_indexes': True}),
+    (r'^css/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'static/css', 'show_indexes': True}),
+    (r'^images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'static/images', 'show_indexes': True}),
 )
 
 urlpatterns += patterns('scrapeo.scrapcore',
-	#(r'^/$','index'),
+	(r'^$','mainview.index'),
 	
 	#=== PRODUCTION / AJAX URLS ===
 	(r'^query','ajax_views.findPages'),
