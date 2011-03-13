@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     (r'^images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'static/images', 'show_indexes': True}),
 )
 
-urlpatterns += patterns('scrapeo.scrapcore',
+urlpatterns += patterns('scrapcore',
 	(r'^$','mainview.index'),
 	
 	#=== PRODUCTION / AJAX URLS ===

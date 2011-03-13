@@ -64,7 +64,8 @@ class PageRank(Job) :
         self.rank      = None
     def _run(self):
         hsh = self.cek_hash(self.hash_url(self.targeturl))
-        gurl = 'http://www.google.com/search?client=navclient-auto&features=Rank:&q=info:%s&ch=%s' % (urllib.quote(self.targeturl), hsh)
+        gurl = 'http://ipv4.google.com/search?client=navclient-auto&features=Rank:&q=info:%s&ch=%s' % (urllib.quote(self.targeturl), hsh)
+
         try:
             f = self.browser.open(gurl)
             toprint = '-'*10+ '\n'
@@ -192,11 +193,11 @@ class SERPScrapper(Job):
 class GoogleSearchBot:
     def __init__(self, extension='com'):
         self.extension = extension
-        self.baseurl   = 'www.google'
+        self.baseurl   = 'ipv4.google'
         self.searchcmd = 'search'
         self.browser   = BaseBrowser()
-	self.urlPart1  = "http://%s.%s"%(self.baseurl,self.extension)
-	
+        self.urlPart1  = "http://%s.%s"%(self.baseurl,self.extension)
+
     def _getTrueUrl(self,ggurl):
         trueUrl = None
         if ggurl.startswith('http'):
